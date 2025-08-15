@@ -40,7 +40,7 @@ const Admin = mongoose.model('Admin', adminSchema);
 const Purchase = mongoose.model('Purchase', purchaseSchema);
 
 
-module.export = {
+module.exports = {
     User,
     Course,
     Admin,
