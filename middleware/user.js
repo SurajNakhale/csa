@@ -10,6 +10,9 @@ function userMiddleware(req, res, next){
 
     if(decoded){
         req.userId = decoded.id;
+         //“Take the id from the decoded token, 
+        // and attach it to the incoming request as req.adminId.
+        // you can easily access which admin is making the request.”
         next();
 
     }else{

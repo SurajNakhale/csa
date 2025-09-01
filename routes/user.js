@@ -1,11 +1,11 @@
 const { Router } = require("express");
+const userRouter = Router();
+const { User } = require("../db");
+
 const { z } = require("zod");
 const bcrypt = require("bcrypt");
-const { User } = require("../db");
-const { JWT_USER_PASSWORD } = require("../config");
 const jwt = require("jsonwebtoken");
-const userRouter = Router();
-
+const { JWT_USER_PASSWORD } = require("../config");
 
 
 userRouter.post("/signup", async (req,res)=>{
@@ -23,7 +23,8 @@ userRouter.post("/signup", async (req,res)=>{
   });
 
      
-    // Parse the request body using the requireBody.safeParse() method to validate the data format
+    // Parse the request body using the requireBody.safeParse() 
+    // method to validate the data format
     // "safe" parsing (doesn't throw error if validation fails)
      const result = requireBody.safeParse(req.body);
 
