@@ -8,6 +8,8 @@ const jwt = require("jsonwebtoken");
 const { JWT_USER_PASSWORD } = require("../config");
 
 
+
+//signup end point
 userRouter.post("/signup", async (req,res)=>{
     //zod validation
     const requireBody = z.object({
@@ -41,7 +43,7 @@ userRouter.post("/signup", async (req,res)=>{
 
     //hash the password with bcrypt with salt round of 5
     const hashPassword = await bcrypt.hash(password, 5);
-console.log("User:", User);
+//console.log("User:", User);
     
     // create a new user in db
 try{
@@ -60,7 +62,9 @@ try{
     res.json({
         msg: 'signup successful'
     })
-})//signup end point
+})
+
+
 
 
 
@@ -117,6 +121,8 @@ userRouter.post("/signin",async (req,res)=>{
 
 
 userRouter.get("/purchases",(req,res)=>{
+
+    
     res.json({
         msg: 'hello'
 
