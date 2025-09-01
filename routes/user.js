@@ -1,11 +1,12 @@
 const { Router } = require("express");
 const userRouter = Router();
-const { User } = require("../db");
+const { User, Purchase } = require("../db");
 
 const { z } = require("zod");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { JWT_USER_PASSWORD } = require("../config");
+const { userMiddleware } = require("../middleware/user");
 
 
 
@@ -104,7 +105,7 @@ userRouter.post("/signin",async (req,res)=>{
         const token = jwt.sign({
             id: user._id,
         }, JWT_USER_PASSWORD)
-        // send generated token bac to the client 
+        // send generated token back to the client 
         res.json({
             token: token
         })
@@ -120,11 +121,15 @@ userRouter.post("/signin",async (req,res)=>{
 
 
 
-userRouter.get("/purchases",(req,res)=>{
+userRouter.get("/purchases",userMiddleware, async(req,res)=>{
+    const userId = req.userId;
 
-    
+    const purchases = await Purchase.find({
+        userId
+    })
+
     res.json({
-        msg: 'hello'
+        purchases
 
     })
 })//give purchases made my user

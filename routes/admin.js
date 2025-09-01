@@ -112,7 +112,7 @@ adminRouter.post('/course', adminMiddleware, async (req, res)=>{
   const requireBody = z.object({
     title: z.string().min(3),//title must be at list 3 characters
     description: z.string().min(5),//must be at least 5 characters
-    imageUrl: z.string().url(),//image url must be valid url
+    imageUrl: z.string().url().optional(),//image url must be valid url
     price: z.number().positive(),//price must be positive number
   })  
 
